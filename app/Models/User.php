@@ -23,6 +23,7 @@ class User extends Authenticatable
         'address',
         'phone',
         'role',
+        'image',
     ];
 
     /**
@@ -31,6 +32,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function setPasswordAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['password'] = bcrypt($value);
+        }
+    }
 
     public function requests()
     {
