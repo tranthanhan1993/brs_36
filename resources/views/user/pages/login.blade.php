@@ -18,66 +18,80 @@
     <body>
         <div class="global">
             <div style="" class="divlogin">
+
                 {{ Html::image('user/img/logo.png') }}
                 <div class="div_tblogin">
+                    {!! Form::open(['class' => 'form-horizontal', 'action' => 'Auth\LoginController@login']) !!}
                     <table>
                         <tr>
                             <td>{{ trans('user.email') }}</td>
                             <td>{{ trans('login.password') }}</td>
-                            <td></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name=""></td>
-                            <td><input type="text" name=""></td>
-                            <td><input type="submit" name="" value="{{ trans('master.login') }}"></td>
+                            <td>{!! Form::email('email', '', ['class' => 'form-control']) !!}</td>
+                            <td>{!! Form::password('password', ['class' => 'form-control']) !!}</td>
+                            <td>{!! Form::submit(trans('master.login'), ['class' => 'btn btn-promary']) !!}</td>
                         </tr>
                         <tr>
                             <td><a href="">{{ trans('login.forgor_password') }}</a></td>
                         </tr>
                     </table>
+                    {!! Form::close() !!}
                 </div>
+
             </div>
+
             <div class="divregister">
                 {{ Html::image('user/img/logobook.png') }}
                 <div class="div_tbregister">
-                    <table>
-                        <tr>
-                            <td><p class="p_login">{{ trans('login.register') }}</p></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" class="inputtext" placeholder="{{ trans('user.name') }}"> </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" class="inputtext" placeholder="{{ trans('user.email') }}"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="Password" name="" class="inputtext" placeholder="{{ trans('login.password') }}"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="Password" name="" class="inputtext" placeholder="{{ trans('login.retypepassword') }}"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>{!! Form::date('date', 'date', ['class' => 'date form-control']) !!}</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" class="inputtext" placeholder="{{ trans('user.phone') }}"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" class="inputtext" placeholder="{{ trans('user.address') }}"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="gender">{{ trans('user.male') }}<input type="radio" name="gender">{{ trans('user.female') }}<input type="submit" name="Register" value="{{ trans('login.register1') }}"></td>
-                            <td> </td>
-                        </tr>
-                    </table>
+                    {!! Form::open(['class' => 'form-horizontal', 'action' => 'User\RegisterController@register']) !!}
+                        <table>
+                            <tr>
+                                <td><p class="p_login">{{ trans('login.register') }}</p></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::text('name', '', ['class' => 'inputtext', 'placeholder' => trans('user.name'), 'id' => 'name']) !!}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::email('email', '', ['class' => 'inputtext', 'placeholder' => trans('user.email'), 'id' => 'email']) !!}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::password('password', ['class' => 'inputtext', 'placeholder' => trans('login.password'), 'id' => 'password']) !!}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::password('password-confirm', [
+                                    'class' => 'inputtext',
+                                    'name' => 'password_confirmation',
+                                    'placeholder' => trans('login.retypepassword')
+                                    ])
+                                    !!}
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::select('gender', ['0' => 'Male', '1' => 'Female'], 'Male',['class' => 'inputtext', 'id' => 'gender']) !!}</td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::date('birthday', 'date', ['class' => 'inputtext', 'placeholder' => trans('user.birthday'), 'id' => 'birthday']) !!}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::text('phone', '', ['class' => 'inputtext', 'placeholder' => trans('user.phone'), 'id' => 'phone']) !!}</td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{!! Form::text('address', '', ['class' => 'inputtext', 'placeholder' => trans('user.address'), 'id' => 'address']) !!}</td>
+                                <td>
+                                    {!! Form::submit(trans('auth.register'), ['class' => 'btn btn-primary', 'name' => 'register']) !!}
+                                </td>
+                            </tr>
+                        </table>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

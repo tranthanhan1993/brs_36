@@ -102,4 +102,14 @@ class User extends Authenticatable
             $this->attributes['role'] = config('user.role.user');
         }
     }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    public function isUser()
+    {
+        return $this->role == config('user.role.user');
+    }
 }
