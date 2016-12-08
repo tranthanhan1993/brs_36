@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Book Review System">
     <meta name="author" content="Tran Thanh An">
-    <title>{{ trans('general.page_title') }}</title>
+    <title>@yield('title')</title>
 
     {!! Html::style('bower/bootstrap/dist/css/bootstrap.min.css') !!}
     {!! Html::style('bower/metisMenu/dist/metisMenu.min.css') !!}
@@ -17,9 +17,7 @@
 </head>
 
 <body>
-
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -78,7 +76,7 @@
                                     <a href="#">{{ trans('category.list_category') }}</a>
                                 </li>
                                 <li>
-                                    <a href="#">{{ trans('category.add_category') }}</a>
+                                    <a href="#">{{ trans('category.category_create_title') }}</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -117,7 +115,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-share fa-fw"></i>{{ trans('bookRequest.book_request') }}<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-share fa-fw"></i>{{ trans('book_request.book_request') }}<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="#">{{ trans('bookRequest.list_request') }}</a>
@@ -140,11 +138,15 @@
                     <div class="col-lg-12">
                         @yield('header')
                     </div>
-                    <!-- /.col-lg-12 -->
+                    <div class="col-lg-8" id="alert">
+                        @include('admin.block.fails')
+                        @include('admin.block.success')
+                    </div>
+                    <div class="col-lg-8" id="alert">
+                        @include('includes.error')
+                    </div>
                     @yield('content')
-                    
                 </div>
-                <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -170,7 +172,7 @@
             responsive: true
         });
     });
+    $('div.alert').delay(2000).slideUp();
     </script>
 </body>
-
 </html>
