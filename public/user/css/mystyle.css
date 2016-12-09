@@ -34,6 +34,7 @@
 .divsearch{ float: left; }
 .fleft{ float: left; }
 .freework { float: left;width: 900px; }
+.detail.freework{ margin-top:-10px;height: auto; }
 .fsearch{ margin-top: 0px; }
 .divsearch input[type=text]{
     width: 270px;padding: 8px 12px;
@@ -290,7 +291,7 @@
 
 .khung1 >img { float: left;width: 300px;height: 420px;border: 5px solid white; }
 
-.khung1 table{ margin-top: 0px;margin-left: 45px; }
+.khung1 table{ margin-top: 0px;margin-left: 45px;text-align: center; }
 
 .inforbook{
     float: left;margin-left: 10px;
@@ -542,13 +543,6 @@
 
 .inputtext{ border:0px;padding: 10px 10px;width: 300px;border-radius: 3px; }
 
-.sele{
-    border:0px;width: 97px;
-    padding: 5px 10px;
-    border-radius: 3px;
-    color: gray;font-size: 16px;
-}
-
 .div_tbregister{ margin: 20px 0px 0px 200px;float: left;}
 
 .div_tbregister tr:last-child{ color: white; }
@@ -556,3 +550,11 @@
 .p_login{ color: white;font-size: 20px;margin-bottom: 0px; }
 
 .re_area{ height: 250px;width: 478px;padding: 10px;margin-bottom: 20px;border: 0; }
+
+.pgrequest.timeacti { height:505px; }
+
+.list.timeacti { height:1420px; }
+
+.detail.timeacti { height:1140px; }
+
+.date.form-control{ width: 300px;height: 40px;border: 0;color: gray;font-size: 16px; }
