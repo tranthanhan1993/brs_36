@@ -31,6 +31,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $dates = ['birthday'];
     protected $hidden = ['password', 'remember_token'];
 
     public function setPasswordAttribute($value)
