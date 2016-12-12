@@ -41,6 +41,11 @@ class User extends Authenticatable
         }
     }
 
+    public function isAdmin()
+    {
+        return $this->role == config('user.role.admin');
+    }
+
     public function requests()
     {
         return $this->hasMany(Request::class);
