@@ -15,4 +15,5 @@ return [
     'myaddress' =>'8901 Marmora Road,Glasgow, D04 89GR.',
     'required_fields' => 'Required fields',
     'cancel' => 'Cancel',
+    'book_request' => 'Book Request',
 ];

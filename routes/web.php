@@ -27,3 +27,7 @@ Route::post('/custom-register',[
     'as' => 'register',
     'uses' => 'User\RegisterController@register',
 ]);
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('category', 'Admin\CategoryController');
+});
