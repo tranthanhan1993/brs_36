@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.pages.login');
 });
 
 Auth::routes();
@@ -27,7 +27,8 @@ Route::post('/custom-register',[
     'as' => 'register',
     'uses' => 'User\RegisterController@register',
 ]);
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::resource('category', 'Admin\CategoryController');
 });
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::post('/login', 'Auth\LoginController@login');
