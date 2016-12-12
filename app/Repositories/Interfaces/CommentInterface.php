@@ -8,4 +8,5 @@ interface CommentInterface
     public function setComment($userId, $reviewId, $content);
     public function editComment($userId, $reviewId, $content);
     public function deleteComment($commentId);
+    public function getContent($id);
 }

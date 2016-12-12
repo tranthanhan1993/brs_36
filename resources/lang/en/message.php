@@ -8,4 +8,13 @@ return [
     'show_error' => 'Error in show process',
     'find_error' => 'Find Id Error,Please try again',
     'edit_user_successfully' => 'Edit user profile successfully',
+    'success' => 'Success',
+    'fail' => 'Fail',
+    'like' => 'likes',
+    'mark' => 'marks',
+    'favorite' => 'favorites',
+    'follow' => 'relationships',
+    'review' => 'reviews',
+    'comment' => 'comments',
+    'rate' => 'rates',
 ];

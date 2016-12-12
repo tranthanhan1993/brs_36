@@ -59,4 +59,9 @@ class CommentRepository extends BaseRepository implements CommentInterface
 
         return false;
     }
+
+    public function getContent($id)
+    {
+        return $this->find($id)->review;
+    }
 }

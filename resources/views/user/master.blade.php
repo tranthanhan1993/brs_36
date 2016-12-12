@@ -15,6 +15,9 @@
         {{ Html::style('user/css/tm_docs.css') }}
         {{ Html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js') }}
         {{ Html::script('/user/js/myscript.js') }}
+        {{ Html::script('/js/timelinescript.js') }}
+        {{ Html::script('/js/jquery.json2html.js') }}
+        {{ Html::script('/js/json2html.js') }}
     </head>
 <!--header-->
 
@@ -43,4 +46,5 @@
         @include('user.blocks.footer')
     </div>
 </body>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </html>

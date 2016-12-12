@@ -6,8 +6,9 @@ use App\Models\User;
 use Input;
 use Hash;
 use App\Repositories\BaseRepository;
+use App\Repositories\Interfaces\UserInterface;
 
-class UserRepository extends BaseRepository
+class UserRepository extends BaseRepository implements UserInterface
 {
     public function __construct(User $user)
     {
@@ -33,7 +34,7 @@ class UserRepository extends BaseRepository
         } else {
             $fileName =  config('settings.avatar_default');
         }
-        
+
         $user = [
             'name' => $request['name'],
             'email' => $request['email'],
@@ -88,5 +89,10 @@ class UserRepository extends BaseRepository
         }
 
         return $fileName;
+    }
+
+    public function getProfile($id)
+    {
+        return $this->find($id);
     }
 }
