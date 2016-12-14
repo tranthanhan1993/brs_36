@@ -70,7 +70,7 @@
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i>{{ trans('general.dashboard') }}</a>
                         </li>
                         <li>
-                            <a href="{!! action('Admin\CategoryController@index') !!}"><i class="fa fa-bar-chart-o fa-fw"></i>{{ trans('category.category') }}<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>{{ trans('category.category') }}<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{!! action('Admin\CategoryController@index') !!}">{{ trans('category.list_category') }}</a>
@@ -85,16 +85,16 @@
                             <a href="#"><i class="fa fa-cube fa-fw"></i>{{ trans('book.book') }}<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">{{ trans('book.list_book') }}</a>
+                                    <a href="{!! action('Admin\BookController@index') !!}">{{ trans('book.list_book') }}</a>
                                 </li>
                                 <li>
-                                    <a href="#">{{ trans('book.add_book') }}</a>
+                                    <a href="{!! action('Admin\BookController@create') !!}">{{ trans('book.add_book') }}</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="{!! action('Admin\UserController@index') !!}"><i class="fa fa-users fa-fw"></i>{{ trans('user.user') }}<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>{{ trans('user.user') }}<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{!! action('Admin\UserController@index') !!}">{{ trans('user.list_user') }}</a>
@@ -106,7 +106,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="{!! action('Admin\AuthorController@index') !!}"><i class="fa fa-user fa-fw"></i>{{ trans('author.author') }}<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i>{{ trans('author.author') }}<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{!! action('Admin\AuthorController@index') !!}">{{ trans('author.list_author') }}</a>
