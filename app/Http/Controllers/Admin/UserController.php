@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Repositories\UserAdmin\UserRepository;
+use App\Http\Controllers\BaseController;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     protected $userRepository;
 

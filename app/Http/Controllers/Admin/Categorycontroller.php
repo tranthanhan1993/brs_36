@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CreateCategoryRequest;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Repositories\Category\CategoryRepository;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Controllers\BaseController;
 
-class Categorycontroller extends Controller
+class Categorycontroller extends BaseController
 {
     protected $categoryRepository;
 

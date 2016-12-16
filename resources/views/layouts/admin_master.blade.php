@@ -121,7 +121,7 @@
                             <a href="#"><i class="fa fa-file fa-fw"></i>{{ trans('review.review') }}<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">{{ trans('review.list_review') }}</a>
+                                    <a href="{!! action('Admin\ReviewController@index') !!}">{{ trans('review.list_review') }}</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
