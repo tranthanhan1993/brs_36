@@ -567,3 +567,84 @@
 .detail.timeacti { height:1140px; }
 
 .date.form-control{ width: 300px;height: 40px;border: 0;color: gray;font-size: 16px; }
+
+/*-----------Timeline----------*/
+
+
+.binfo{ float: left;background: #939191;margin-left: 2px; }
+
+.binfo table tr{ background: #939191;color: white; }
+
+/*.binfo table tr:nth-child(2){ border-bottom: none; }*/
+.binfo table tr td{ padding-top:2px;  }
+
+.binfo table tr td h2{ font-size: 18px;margin: auto;color: white; }
+
+.binfo table tr td input[type=radio]{ margin-right: 5px; }
+
+.binfo table{
+    width: 389px;
+    margin: 0px 2px 0px 10px;
+    background: gray;
+    height: 218px;
+}
+.tline{
+    position: relative;
+    width: 575px;height: 250px;
+    margin:10px 0px 0px 10px;
+    background: #464444
+}
+
+.tline p{ margin-bottom: 0px;margin-left: 10px;color: white; }
+
+.tline>div{ width: 575px;height: 220px; }
+
+.tline>div>img{
+    width: 168px; height: 218px;
+    border: 2px solid white;
+    float: left;position: relative;
+    margin-left: 2px;
+}
+
+.img1 {
+    /* position: fixed; */
+    position: absolute;
+    bottom: 5px;
+    /* margin: 188px 0px 0px 5px; */
+    margin-left: 5px;
+}
+
+.img1>p{ float: left;margin: -3.5px 2px 0px 2px; }
+
+.img1>img{
+    width: 21px;height: 21px;
+    margin-right: 5px;float: left;
+    margin: 1px 8px 0px 0px;
+}
+.imga1{
+    font-size: 12px;padding: 4px 5px 2px 0px;
+    background-image: url('../img/nen.png');
+    color:white;font-weight: bold;
+    position: relative;float: left;
+    border-radius: 3px;margin-left: 2px;
+}
+
+.imga1>img{
+    width: 16px;height: 16px;float: left;
+    margin: 0px 2px 2px 3px;
+}
+
+.img1 a:last-child{
+    padding: 4px 5px 3px 5px;
+    background-image: url('../img/nen.png');
+    color:white;font-weight: bold;
+    position: relative;float: left;
+    border-radius: 3px;margin-left: 10px;
+    font-size: 12px;
+}
+
+.iconinfo{ width: 16px;height: 16px;margin-right: 5px; }
+
+.starrate{ width: 15px;height: 15px;margin-top: -4px; }
+
+.collg{ width: 290px;padding-left: 0px; }
