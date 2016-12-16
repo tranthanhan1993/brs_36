@@ -44,5 +44,5 @@ return [
     'edit_book_successfully' => 'Edit Book Success',
     'edit_book_fail' => 'Edit Book Fail!!',
     'submit' => 'Submit',
+    'book_tittle' => 'Book Tittle',
 ];
-

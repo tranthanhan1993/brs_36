@@ -50,4 +50,9 @@ class Book extends Model
     {
         return $this->hasMany(Mark::class);
     }
+
+    public function getImagePath ()
+    {
+        return asset(config('settings.image_url') . $this->image);
+    }
 }

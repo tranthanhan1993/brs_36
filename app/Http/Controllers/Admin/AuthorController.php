@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Repositories\Author\AuthorRepository;
 use App\Http\Requests\CreateAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
+use App\Http\Controllers\BaseController;
 
-class AuthorController extends Controller
+class AuthorController extends BaseController
 {
     protected $authorRepository;
 

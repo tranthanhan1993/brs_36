@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Repositories\Author\AuthorRepository;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Book\BookRepository;
+use App\Http\Controllers\BaseController;
 
-class BookController extends Controller
+class BookController extends BaseController
 {
     protected $bookRepository;
     protected $authorRepository;
