@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::resource('category', 'CategoryController');
     Route::resource('user', 'UserController');
     Route::resource('author', 'AuthorController');
+    Route::resource('book', 'BookController');
 });
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/login', 'Auth\LoginController@login');

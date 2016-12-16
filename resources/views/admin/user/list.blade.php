@@ -12,11 +12,11 @@
             <tr>
                 <th class="text-center">{{ trans('user.user_id') }}</th>
                 <th class="text-center">{{ trans('user.name') }}</th>
+                <th class="text-center">{{ trans('user.avatar') }}</th>
                 <th class="text-center">{{ trans('user.gender') }}</th>
                 <th class="text-center">{{ trans('user.address') }}</th>
                 <th class="text-center">{{ trans('user.phone') }}</th>
                 <th class="text-center">{{ trans('user.role') }}</th>
-                <th class="text-center">{{ trans('user.avatar') }}</th>
                 <th class="text-center" style="width: 90px;">{{ trans('user.user_action') }}</th>
             </tr>
         </thead>
@@ -25,11 +25,11 @@
                 <tr class="odd gradeX text-center">
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
+                    <td><span></span><img src="{{ $user->getAvatarPath() }}" width="80px" height="50px"></span></td>
                     <td>{{ $user->gender ? trans('user.male') : trans('user.female') }}</td>
                     <td>{{ $user->address }}</td>
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->role ? trans('user.admin') : trans('user.user') }} </td>
-                    <td><span></span><img src="{{  $user->getAvatarPath() }}" width="80px" height="50px"></span></td>
                     <td>
                         {!! Form::open(['action' => ['Admin\UserController@destroy', $user->id], 'method' => 'DELETE']) !!}
                         <div class="btn-group">

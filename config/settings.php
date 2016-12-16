@@ -4,4 +4,5 @@ return [
     'avatar_path' => '/uploads/images/',
     'avatar_default' => 'default.jpg',
     'image_url' => '/public/image/',
+    'image_default' => 'default.jpg',
 ];

@@ -54,7 +54,7 @@ abstract class BaseRepository
 
     public function lists($column, $key = null)
     {
-        return $this->model->lists($column, $key);
+        return $this->model->orderBy($column)->pluck($column, $key);
     }
 
     public function create($inputs)
