@@ -2,80 +2,148 @@
 @section('content')
 <div class="freework">
     <article class="col-lg-3 col-md-3 col-sm-3 sm3">
-        {{ Html::image('user/img/page1_pic6.jpg', 'a picture', ['class' => 'home_img']) }}
-        <h3 class="home_img_h3">{{ Html::image('user/img/prof.png', 'a picture', ['class' => 'imgleft']) }}{{ trans('master.profile') }}</h3>
-        <a href="#" class="edit_follow">{{ trans('master.update') }}</a>
+        {{ Html::image('user/img/'.$user->image, 'a picture', ['class' => 'home_img', 'id' => 'avatar']) }}
+            @if ($user->id == Auth::user()->id)
+                {!! Form::open(['class' => 'form-horizontal']) !!}
+                {!! Form::file('imageFile', ['class' => 'inputImg', 'id' => 'imageFile'] ) !!}
+                {!! Form::close() !!}
+            @endif
+        <h3 class="home_img_h3">{{ Html::image('user/img/prof.png','a picture', array('class' => 'imgleft')) }}{{ trans('master.profile') }}</h3>
         <div class="cclear"></div>
         <ul class="list2">
-            <li><a href="#">{{ trans('user.name') }}: Huynh Minh Tri</a></li>
-            <li><a href="#">{{ trans('user.birthday') }}: 19/11/1995</a></li>
-            <li><a href="#">{{ trans('user.gender') }}: Male</a></li>
-            <li><a href="#">{{ trans('user.phone') }}: 01212152770</a></li>
-            <li><a href="#">{{ trans('user.address') }}: Thanh Khue, Da Nang</a></li>
+            <li><a >{{ trans('user.name') }}: {{ $user->name }}</a></li>
+            <li><a >{{ trans('user.email')}}: {{ $user->email }}</a></li>
+            <li><a >{{ trans('user.birthday') }}: {{ $user->birthday->format('Y-m-d') }}</a></li>
+            <li>
+                <a >
+                    {{ $user->gender ? trans('user.male') : trans('user.female') }}
+                </a>
+            </li>
+            <li><a >{{ trans('user.phone') }}: {{ $user->phone }}</a></li>
+            <li><a >{{ trans('user.address') }}: {{ $user->address }}</a></li>
+            @if ($user->id == Auth::user()->id)
+                {!! Form::open(['class' => 'form-horizontal']) !!}
+                    <a href="#" class="edit_follow">{{ trans('master.edit') }}</a>
+                    <li>{!! Form::submit(trans('master.update'), ['class' => 'edit_follow']) !!}</li>
+                {!! Form::close() !!}
+            @endif
         </ul>
                 <!-- FAVORITE BOOKS -->
-        <h3 class="favor_h3">{{ Html::image('user/img/book.png', 'a picture', ['class' => 'imgleft']) }}{{ trans('master.favorite_book') }}</h3>
+        <h3 class="favor_h3">{{ Html::image('user/img/book.png','a picture', ['class' => 'imgleft']) }}{{ trans('master.favorite_book') }}</h3>
         <a href="#" class="amore">{{ trans('master.more') }}</a>
         <div class="cclear"></div>
         <div class="list_book">
+            @foreach ($data['favorites'] as $favorite)
             <a href="#">
                 <div class="bfollow">
-                    {{ Html::image('user/img/page1_pic2.jpg') }}
-                    <p> Nhung nguoi khon kho </p>
+                    {{ Html::image('user/img/'.$favorite['image']) }}
+                    <p> {{ $favorite['tittle'] }} </p>
                 </div>
             </a>
-            <a href="#">
-                <div class="bfollow">
-                    {{ Html::image('user/img/page1_pic2.jpg') }}
-                    <p> Nhung nguoi khon kho </p>
-                </div>
-            </a>
+            @endforeach
         </div>
                 <!-- END FAVORITE BOOKS -->
                 <!-- LIST FOLLOW -->
-        <h3 class="fo_h3">{{ Html::image('user/img/fl.png', 'a picture', ['class' => 'imgleft']) }}{{ trans('master.list_follow') }}</h3>
-        <div class="list_follow" >
+        <h3 class="fo_h3">{{ Html::image('user/img/fl.png','a picture', ['class' => 'imgleft']) }}{{ trans('master.list_follow') }}</h3>
+        <div class="list_follow" id="follow" >
             <div class="tbfollow" >
+                {!! Form::open(['class' => 'form-horizontal']) !!}
                 <table>
                     <tr>
                         <th class="th1"></th>
                         <th class="th_au"></th>
                         <th class="th_au"></th>
                     </tr>
+                    @foreach ($data['followed'] as $follow)
                     <tr>
-                        <td>{{ Html::image('user/img/page1_pic6.jpg', 'a picture', ['class' => 'imgfollow']) }}</td>
-                        <td><a href="">minh hoang </a><p> 23 {{ trans('master.follower') }}</p></td>
-                        <td><button>{{ trans('master.unfollow') }}</button> </td>
+                        <td>{{ Html::image('user/img/'.$follow['image'],'a picture', ['class' => 'imgfollow']) }}</td>
+                        <td>
+                            <a href="/home/user/{{ $follow['id'] }}">{{ $follow['name'] }}</a>
+                            <p> {{ $follow['countFollowed']}}
+                                {{ trans('master.follower') }}
+                            </p>
+                            <p>
+                                {{ trans('master.follow') }}
+                                {{ $follow['countFollower']}} {{ trans('user.user') }}
+                            </p>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            @if ($follow['follower'] == Auth::user()->id)
+                                {!! Form::button(trans('master.unfollow'), ['class' => 'clickOnChange', 'id' => $follow['id']]) !!}
+                            @endif
+                        </td>
                     </tr>
-                    <tr>
-                        <td>{{ Html::image('user/img/page1_pic6.jpg', 'a picture', ['class' => 'imgfollow']) }}</td>
-                        <td><a href="">minh hoang </a><p> 23 {{ trans('master.follower') }}</p></td>
-                        <td><button>{{ trans('master.unfollow') }}</button> </td>
-                    </tr>
+                    @endforeach
                 </table>
+                {!! Form::close() !!}
             </div>
         </div>
     </article>
                 <!-- END LIST FOLLOW -->
                 <!-- TIME LINE -->
-    <div class="timeline">
-        <h2>{{ trans('master.time_line') }}</h2>
-        <div class="timecontent" >
-            <table>
-                <tr>
-                    <th class="th1"></th>
-                    <th class="th2"></th>
-                    <th class="th_au"></th>
-                    <th class="th1"></th>
-                </tr>
-                <tr>
-                    <td>{{ Html::image('user/img/like3.png', 'a picture', ['class' => 'hlike']) }}</td>
-                    <td>You likes hong dao's </td>
-                    <td>Đừng cố gắng kéo một sợi dây {{ Html::image('user/img/page3_pic1.jpg', 'a picture', ['class' => 'hbook']) }}</td>
-                    <td>{{ Html::image('user/img/option.png', 'a picture', ['class' => 'hoption']) }}</td>
-                </tr>
-            </table>
-        </div>
+    <div class="timeline tl" id="timeline">
+        @foreach($activities as $action)
+            <div class="tline">
+                <p> {{ $action['title'] }} </p>
+                <div>
+                    <div class="img1" >
+                        <p>3</p>
+                        {{ Html::image('user/img/rate.png') }}
+                        <a href="" class="imga1">{{ Html::image('user/img/like2.png') }}{{ trans('book.unlike') }}</a>
+                        <a href="">More</a>
+                    </div>
+                    <div class="binfo" >
+                        <div class="cclear" ></div>
+                            @if ($action['type'] == trans('message.follow') || $action['type'] == trans('message.comment'))
+                                <table>
+                                    <tr>
+                                        <td colspan="2"><h2>Harry botter</h2></td>
+                                    </tr>
+                                </table>
+                            @else
+                                <table>
+                                    <tr>
+                                        <td colspan="2"><h2><a href ="#">{{ $action['content']->tittle }}</a></h2></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Html::image('user/img/author.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.author') }}:</td>
+                                        <td>{{ $action['content']->author->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Html::image('user/img/cate.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.category') }}:</td>
+                                        <td>{{ $action['content']->category->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Html::image('user/img/clock.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.public_day') }}:</td>
+                                        <td>{{ $action['content']->public_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Html::image('user/img/number.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.number_of_likes') }}: </td>
+                                        <td>{{ $action['content']->num_pages }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Html::image('user/img/rate1.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.rate') }}: </td>
+                                        <td>
+                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="check" >{{ trans('book.mark_book_as_reading') }} </td>
+                                        <td><input type="radio" name="check">{{ trans('book.mark_book_as_readed') }}</td>
+                                    </tr>
+                                </table>
+                            @endif
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 @endsection

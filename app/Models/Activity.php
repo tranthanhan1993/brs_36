@@ -16,4 +16,11 @@ class Activity extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $appends = ['title'];
+
+    public function getTitleAttribute()
+    {
+        return $this->user->name . ' ' . $this->target_type . ' ';
+    }
 }

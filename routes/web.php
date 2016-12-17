@@ -15,7 +15,21 @@ Route::get('/', function () {
     return view('user.pages.login');
 });
 Auth::routes();
-Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => '/home', 'middleware:user'], function () {
+    Route::get('/', [
+        'as' => 'user',
+        'uses' => 'User\TimelineController@getTimeline',
+    ]);
+    Route::get('/user/{id}', [
+    'as' => 'user',
+    'uses' => 'User\TimelineController@getTimelineUser',
+    ]);
+    Route::post('/unfollow/{id}', [
+        'as' => 'unFollow',
+        'uses' => 'User\TimelineController@postUnFollow',
+    ]);
+});
 Route::get('/custom-register',[
     'as' => 'register',
     'uses' => 'User\RegisterController@index',
@@ -33,14 +47,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 });
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/login', 'Auth\LoginController@login');
-
-
 Route::resource('list', 'User\BookController', [
     'only' => ['show']
 ]);
-
 Route::get('detail/{id}', 'User\BookController@getDetail');
-
 Route::resource('request', 'User\RequestController', [
     'only' => ['index','store','destroy']
 ]);

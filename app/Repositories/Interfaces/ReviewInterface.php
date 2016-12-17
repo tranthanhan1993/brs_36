@@ -8,4 +8,5 @@ interface ReviewInterface
     public function setReview($userId, $bookId, $content);
     public function editReview($userId, $bookId, $content);
     public function deleteReview($reviewId);
+    public function getContent($id);
 }

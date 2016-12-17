@@ -5,7 +5,7 @@ namespace App\Repositories\Eloquents;
 use App\Models\Rate;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\RateInterface;
-use App\Repositories\Eloquents\BookRepository;
+use App\Repositories\Eloquent\BookRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -41,5 +41,10 @@ class RateRepository extends BaseRepository implements RateInterface
         $point = $this->bookRepository->update(['rate_avg' => $rate], $bookId);
 
         return $point;
+    }
+
+    public function getContent($id)
+    {
+        return $this->find($id)->book;
     }
 }
