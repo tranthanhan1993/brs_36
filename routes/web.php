@@ -52,5 +52,5 @@ Route::resource('list', 'User\BookController', [
 ]);
 Route::get('detail/{id}', 'User\BookController@getDetail');
 Route::resource('request', 'User\RequestController', [
-    'only' => ['index','store','destroy']
+    'only' => ['index', 'store', 'destroy']
 ]);

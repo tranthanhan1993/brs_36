@@ -11,7 +11,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        $this->categoryRepository = \App::make('App\Repositories\Category\CategoryRepository');;
+        $this->categoryRepository = \App::make('App\Repositories\Category\CategoryRepository');
         view()->share('categoryMaster',  $this->categoryRepository->getCategory());
     }
 }
