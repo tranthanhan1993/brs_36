@@ -35,15 +35,13 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i>{{ Auth::user()->name }}<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i>{{ trans('user.profile') }}</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>{{ trans('user.setting') }}</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> {{ trans('user.logout') }}</a>
+                        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ trans('user.logout') }}</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -130,7 +128,7 @@
                             <a href="#"><i class="fa fa-share fa-fw"></i>{{ trans('book_request.book_request') }}<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">{{ trans('bookRequest.list_request') }}</a>
+                                    <a href="{!! action('Admin\BookRequestController@index') !!}">{{ trans('book_request.list_request') }}</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -176,6 +174,8 @@
     {!! Html::script('bower/DataTables/media/js/jquery.dataTables.min.js') !!}
 
     {!! Html::script('bower/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') !!}
+
+    {!! Html::script('js/request.js') !!}
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>

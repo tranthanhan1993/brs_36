@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::resource('author', 'AuthorController');
     Route::resource('book', 'BookController');
     Route::resource('review', 'ReviewController', ['only' => ['index', 'destroy']]);
+    Route::resource('request', 'BookRequestController', ['only' => ['index', 'destroy', 'update']]);
 });
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/login', 'Auth\LoginController@login');
