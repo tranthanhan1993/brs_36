@@ -9,7 +9,7 @@
         <meta name="author" content="Your name">
         <meta name="format-detection" content="telephone=no">
         <!--CSS-->
-        {{ Html::style('user/css/bootstrap.css') }}
+        {{ Html::style('/bower/bootstrap/dist/css/bootstrap.css') }}
         {{ Html::style('user/css/mystyle.css') }}
         {{ Html::style('user/css/style.css') }}
         {{ Html::style('user/css/tm_docs.css') }}
