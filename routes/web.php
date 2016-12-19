@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,20 +9,18 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
 Route::get('/', function () {
     return view('user.pages.login');
 });
 Auth::routes();
-
 Route::group(['prefix' => '/home', 'middleware:user'], function () {
     Route::get('/', [
         'as' => 'user',
         'uses' => 'User\TimelineController@getTimeline',
     ]);
     Route::get('/user/{id}', [
-    'as' => 'user',
-    'uses' => 'User\TimelineController@getTimelineUser',
+        'as' => 'user',
+        'uses' => 'User\TimelineController@getTimelineUser',
     ]);
     Route::post('/follow/{id}', [
         'as' => 'follow',
@@ -50,6 +47,7 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
         'only' => ['store']
     ]);
     Route::resource('user', 'User\UsersController', ['only' => ['edit', 'update']]);
+    Route::get('/search', 'User\SearchController@search');
 });
 
 Route::get('/custom-register',[

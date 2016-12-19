@@ -16,7 +16,6 @@
                     {!! Form::button(trans('master.follow'), ['class' => 'form-control', 'id' => $user->id]) !!}
                 {!! Form::close() !!}
             @endif
-        <h3 class="home_img_h3">{{ Html::image('user/img/prof.png','a picture', array('class' => 'imgleft')) }}{{ trans('master.profile') }}</h3>
         <div class="hide" data-route="{!! URL::action('User\TimelineController@getTimeline') !!}"></div>
         <div class="cclear"></div>
         <ul class="list2">
@@ -41,7 +40,7 @@
         <div class="cclear"></div>
         <div class="list_book">
             @foreach ($data['favorites'] as $favorite)
-            <a href="#">
+            <a href="{{ action('User\BookController@getDetail', $favorite['id']) }}">
                 <div class="bfollow">
                     {{ Html::image('user/img/' . $favorite['image']) }}
                     <p> {{ $favorite['tittle'] }} </p>
@@ -65,7 +64,9 @@
                     <tr>
                         <td>{{ Html::image('user/img/' . $follow['image'], 'a picture', ['class' => 'imgfollow']) }}</td>
                         <td>
-                            <a href="{{ action('User\TimelineController@getTimelineUser', $follow['id']) }}">{{ $follow['name'] }}</a>
+                            <a href="{{ action('User\TimelineController@getTimelineUser', $follow['id']) }}">
+                                {{ $follow['name'] }}
+                            </a>
                             <p> {{ $follow['countFollowed']}}
                                 {{ trans('master.follower') }}
                             </p>
@@ -93,12 +94,14 @@
                 <!-- TIME LINE -->
     <div class="timeline tl" id="timeline">
         @foreach($activities as $action)
+            @if ($action['type'] == config('settings.follow') || $action['type'] == config('settings.comments'))
+                <div ><p> {{ $action['title'] }} </p></div>
+            @else
             <div class="tline">
                 <p> {{ $action['title'] }} </p>
                 <div>
-                    {{ Html::image('user/img/page3_pic6.jpg') }}
+                    {{ Html::image('user/img/' . $action['content']->image) }}
                     <div class="img1" >
-                        <p>3</p>
                         {{ Html::image('user/img/rate.png') }}
                         <a href="" class="imga1">{{ Html::image('user/img/like2.png') }}{{ trans('book.unlike') }}</a>
                         <a href="">More</a>
@@ -151,6 +154,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         @endforeach
     </div>
 </div>

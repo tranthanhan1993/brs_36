@@ -38,7 +38,7 @@
                         <i class="fa fa-user fa-fw"></i>{{ Auth::user()->name }}<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{!! action('Admin\UserController@edit', $user->id) !!}"><i class="fa fa-user fa-fw"></i>{{ trans('user.edit_profile') }}</a>
+                        <li><a href="{!! action('Admin\UserController@edit', Auth::user()->id) !!}"><i class="fa fa-user fa-fw"></i>{{ trans('user.edit_profile') }}</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="{!! action('Auth\LoginController@logout') !!}"><i class="fa fa-sign-out fa-fw"></i> {{ trans('user.logout') }}</a>

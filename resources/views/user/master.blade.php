@@ -32,10 +32,16 @@
             <!-- contain activity follower -->
             <div class="containt_acti_follower" >
                 <div class="divsearch">
-                    <form id="fsearch" action="search.php" method="GET" accept-charset="utf-8">
-                        <input type="text" name="" placeholder="{{ trans('master.search') }}...">
-                        <a href="#">{{ Html::image('user/img/magnify.png') }}</a>
-                    </form>
+                    {!! Form::open([
+                        'name' => 'search',
+                        'class' => 'form-horizontal',
+                        'id' => 'fsearch',
+                        'action' => 'User\SearchController@search',
+                        'method' => 'GET',
+                    ])
+                    !!}
+                        {!! Form::text('search', '', ['class' => 'form-control', 'placeholder' => trans('master.search')]) !!}
+                    {!! Form::close() !!}
                 </div>
                 @yield('content1')
             </div>
