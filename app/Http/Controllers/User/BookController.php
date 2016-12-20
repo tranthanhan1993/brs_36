@@ -21,11 +21,7 @@ class BookController extends BaseController
     {
         $books = $this->bookRepository->getAllOfBook($categoryId);
 
-        if (!$books) {
-            return view('user.pages.list')->with('fails', trans('book.dont_have_this_book'));
-        }
-
-        return view('user.pages.list', compact('books'));
+        return view('user.pages.list', compact('books', 'categoryId'));
     }
 
     public function getDetail($bookId)
