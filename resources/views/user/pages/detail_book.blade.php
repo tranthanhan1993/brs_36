@@ -6,9 +6,9 @@
             {{ Html::image('user/img/$book->image') }}
             <div class="inforbook" >
                 <h2>{{ $book->tittle }}</h2>
-                <button id ="bt" idbv="{{ $book->id }}">{{ trans('book.unlike') }}</button>
+                <input type="hidden" idtoken="{{ csrf_token() }}" class="gettoken" />
+                <input type="button" id ="bt" idbv="{{ $book->id }}" value="Like"  >
                 {{ Html::image('user/img/like1.png') }}
-                <div class="cclear"></div>
                 <table>
                     <tr>
                         <td>{{ trans('book.author') }}:</td>
@@ -29,14 +29,16 @@
                     <tr>
                         <td>{{ trans('book.rate') }}: </td>
                         <td>
-                            @foreach (range(1, $book->rate_avg) as $rate )
-                                {{ Html::image('user/img/star.png', 'a picture', ['class' => 'star']) }}
-                            @endforeach
+                            <div id="div_rate">
+                                @foreach (range(1, 5) as $key )
+                                 <span class="glyphicon glyphicon-star{{ ($key <=  $book->rate_avg) ? '' : '-empty'}}" id="rate" rate-id="{{ $key }}"></span>
+                                @endforeach
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="radio" name="check" >{{ trans('book.mark_book_as_reading') }} </td>
-                        <td><input type="radio" name="check" >{{ trans('book.mark_book_as_readed') }}</td>
+                        <td><input type="radio" name="mask" value="1" idbv="{{ $book->id }}" >{{ trans('book.mark_book_as_reading') }} </td>
+                        <td><input type="radio" name="mask" value="2" idbv="{{ $book->id }}" >{{ trans('book.mark_book_as_readed') }}</td>
                     </tr>
                 </table>
             </div>
@@ -55,7 +57,7 @@
                     </div>
                     <div >
                         <a class="a like_a_cm">{{ trans('book.like') }}</a>
-                        <a class="b like_a_cm" data-a="{{ $review->id }}" >{{ trans('book.comment') }}</a>
+                        <a class="b like_a_cm" book-a="{{ $review->id }}" >{{ trans('book.comment') }}</a>
                         <p class="p_date">{{ $review->created_at }}</p>
                     </div>
                     <div class="cclear"></div>
@@ -71,15 +73,17 @@
                             </div>
                             <div class="cclear"></div>
                         @endforeach
-                        {{ Html::image('user/img/page3_pic1.jpg', 'a picture', ['class' => 'img_cmt']) }}
-                        <input type="text" name="txtContent" id ="txtContent" class="input_cmt" placeholder="{{ trans('book.write_comment_here') }}...">
+                        <div id="temp_comment{{ $review->id }}">
+                            {{ Html::image('user/img/Auth::user()->image', 'a picture', ['class' => 'img_cmt']) }}
+                            <input type="text" name="txtcomment" id="txtrv{{ $review->id }}" id_review="{{ $review->id }}" class="input_cmt" placeholder="{{ trans('book.write_comment_here') }}...">
+                        </div>
                     </div>
                 </div>
                 <div class="clear_mer"></div>
             @endforeach
-            <div>
-                {{ Html::image('user/img/page3_pic3.jpg', 'a picture', ['class' => 'imgreview']) }}
-                <input type="text" name="txtContent" id="txtContent" class="input_review" placeholder="{{ trans('book.write_request_here') }}...">
+            <div id="reviewhere">
+                {{ Html::image('user/img/Auth::user()->image', 'a picture', ['class' => 'imgreview']) }}
+                <input type="text" name="txtreview" class="input_review" idbv="{{ $book->id }}"placeholder="{{ trans('book.write_request_here') }}..." value="">
             </div>
         </fieldset>
     </div>

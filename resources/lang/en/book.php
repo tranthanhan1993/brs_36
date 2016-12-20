@@ -45,4 +45,6 @@ return [
     'edit_book_fail' => 'Edit Book Fail!!',
     'submit' => 'Submit',
     'book_tittle' => 'Book Tittle',
+    'dont_have' => 'Dont have any categories',
+    'dont_have_book' => 'Dont have book for this category',	
 ];

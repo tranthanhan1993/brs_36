@@ -5,18 +5,18 @@
             <div class="menuBox clearfix">
                 <nav class="navbar navbar-default navbar-static-top tm_navbar clearfix" role="navigation">
                     <ul class="nav sf-menu clearfix sf-js-enabled sf-arrows">
-                        <li class="active"><a>{{ trans('master.home') }}</a></li>
+                        <li><a href="{!! URL::action('User\TimelineController@getTimeline') !!}">{{ trans('master.home') }}</a></li>
                         <li class="sub-menu">{{ trans('master.category') }}
                             <ul class="submenu sub-menu">
                                 @forelse ($categoryMaster as $category)
-                                    <li><a href="">{{ $category->name }}</a></li>
+                                    <li><a href="{!! URL::action('User\BookController@show', $category->id) !!}">{{ $category->name }}</a></li>
                                 @empty
                                     <li><a>{{ trans('book.dont_have') }}</a></li>
                                 @endforelse
                             </ul>
                         </li>
                         <li><a href="#">{{ trans('master.history') }}</a></li>
-                        <li><a href="#">{{ trans('master.request') }}</a></li>
+                        <li><a href="{!! URL::action('User\RequestController@index') !!}">{{ trans('master.request') }}</a></li>
                     </ul>
                 </nav>
             </div>

@@ -41,6 +41,7 @@ class TimelineRepository extends  BaseRepository implements TimelineInterface
         $this->reviews = $review;
         $this->comments = $comment;
         $this->rates = $rate;
+        $this->model = $activity;
     }
 
     public function getTimeline($id, $currentUser)
@@ -73,11 +74,10 @@ class TimelineRepository extends  BaseRepository implements TimelineInterface
         return $activities;
     }
 
-    public function insertAction($userId, $type, $actionId)
+    public function insertAction($inputs)
     {
-        if ($this->create(['user_id' => $userId, 'target_type' => $type, '$target_id' => $actionId])) {
-
-            return true;
+        if ($this->model->create($inputs)) {
+             return true;
         }
 
         return false;
@@ -85,11 +85,7 @@ class TimelineRepository extends  BaseRepository implements TimelineInterface
 
     public function deleteAction($userId, $type, $actionId)
     {
-        $this->model = $this->activities;
-        $action = $this->activities->where('user_id', $userId)->where('target_type', $type)->where('target_id', $actionId)->first();
-
-        if ($action && $this->delete($action->id)) {
-
+        if ($this->model->where('user_id', $userId)->where('target_type', $type)->where('target_id', $actionId)->delete()) {
             return true;
         }
 
