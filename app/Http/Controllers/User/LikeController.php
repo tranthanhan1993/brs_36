@@ -11,11 +11,12 @@ use App\Http\Controllers\Controller;
 class LikeController extends Controller
 {
     protected $likeRepository;
+    protected $timelineRepository;
 
-    public function __construct(LikeRepository $LikeRepository, TimelineRepository $TimelineRepository) 
+    public function __construct(LikeRepository $likeRepository, TimelineRepository $timelineRepository) 
     {
-        $this->likeRepository = $LikeRepository;
-        $this->timelineRepository = $TimelineRepository;
+        $this->likeRepository = $likeRepository;
+        $this->timelineRepository = $timelineRepository;
     }
 
     public function maskLike()
@@ -31,7 +32,7 @@ class LikeController extends Controller
                     'target_id' => $idBook,
                     'user_id' => Auth::user()->id,
                 ];
-                $this->timelineRepository->insertAction( $inputs);   
+                $this->timelineRepository->insertAction($inputs);   
                 $this->likeRepository->create($inputs);
 
                 return 1;

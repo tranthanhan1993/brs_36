@@ -36,7 +36,7 @@ class ReviewController extends Controller
                 'user_id' => Auth::user()->id,
             ];
                
-            if ($this->timelineRepository->insertAction($reviews) && $review = $this->reviewRepository->create($inputs)) {
+            if ($this->timelineRepository->insertAction($timeline) && $review = $this->reviewRepository->create($review)) {
 
                 return [ 
                     'success' => true, 
