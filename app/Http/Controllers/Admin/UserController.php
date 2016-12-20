@@ -7,13 +7,18 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Repositories\UserAdmin\UserRepository;
 use App\Http\Controllers\BaseController;
+use App\Repositories\Review\ReviewRepository;
 
 class UserController extends BaseController
 {
     protected $userRepository;
+    protected $reviewRepository;
 
-    public function __construct(UserRepository $userRepository)
-    {
+    public function __construct(
+        UserRepository $userRepository,
+        ReviewRepository $reviewRepository
+    ) {
+        $this->reviewRepository = $reviewRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -107,7 +112,7 @@ class UserController extends BaseController
             return redirect()->action('Admin\UserController@index')->with('fails', trans('user.user_not_found'));
         }
 
-        if ($this->userRepository->delete($id)) {
+        if ($this->userRepository->deletes($id, $this->reviewRepository)) {
             return redirect()->action('Admin\UserController@index')
                 ->with('success', trans('user.delete_user_successfully'));
         }

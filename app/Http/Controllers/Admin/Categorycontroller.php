@@ -7,14 +7,23 @@ use Illuminate\Http\Request;
 use App\Repositories\Category\CategoryRepository;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Controllers\BaseController;
+use App\Repositories\Book\BookRepository;
+use App\Repositories\Review\ReviewRepository;
 
 class Categorycontroller extends BaseController
 {
     protected $categoryRepository;
+    protected $bookRepository;
+    protected $reviewRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
-    {
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        BookRepository $bookRepository,
+        ReviewRepository $reviewRepository
+     ) {
         $this->categoryRepository = $categoryRepository;
+        $this->bookRepository = $bookRepository;
+        $this->reviewRepository = $reviewRepository;
     }
 
     public function index()
@@ -119,7 +128,7 @@ class Categorycontroller extends BaseController
             return redirect()->action('Admin\CategoryController@index')->with('fails', trans('category.category_not_found'));
         }
 
-        if ($this->categoryRepository->delete($id)) {
+        if ($this->categoryRepository->deletes($id, $this->bookRepository, $this->reviewRepository)) {
             return redirect()->action('Admin\CategoryController@index')
                 ->with('success', trans('category.delete_category_successfully'));
         }

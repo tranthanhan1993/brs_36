@@ -7,14 +7,18 @@ use App\Repositories\Author\AuthorRepository;
 use App\Http\Requests\CreateAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Http\Controllers\BaseController;
+use App\Repositories\Book\BookRepository;
 
 class AuthorController extends BaseController
 {
     protected $authorRepository;
 
-    public function __construct(AuthorRepository $authorRepository)
-    {
+    public function __construct(
+        AuthorRepository $authorRepository,
+        BookRepository $bookRepository
+    ) {
         $this->authorRepository = $authorRepository;
+        $this->bookRepository = $bookRepository;
     }
 
     public function index()
@@ -122,7 +126,7 @@ class AuthorController extends BaseController
                 ->with('fails', trans('author.author_not_found'));
         }
 
-        if ($this->authorRepository->delete($id)) {
+        if ($this->authorRepository->deletes($id, $this->bookRepository)) {
             return redirect()->action('Admin\AuthorController@index')
                 ->with('success', trans('author.delete_author_successfully'));
         }

@@ -68,4 +68,19 @@ class BookRepository extends BaseRepository
 
         return $fileName;
     }
+
+    public function deletes($id, $reviewRepository)
+    {
+        $book = $this->model->find($id);
+        if ($book) {
+            foreach ($book->reviews as $review) {
+                $reviewRepository->delete($review->id);
+            }
+            $book->delete();
+
+            return true;
+        }
+
+        return false;
+    }
 }

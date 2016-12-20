@@ -81,7 +81,7 @@ class UserRepository extends BaseRepository implements UserInterface
     public function uploadAvatar($oldImage)
     {
         $file = Input::file('image');
-        $destinationPath = base_path() . config('settings.avatar_path');
+        $destinationPath = base_path() . '/public' . config('settings.avatar_path');
         $fileName = uniqid(rand(), true) . '.' . $file->getClientOriginalExtension();
         Input::file('image')->move($destinationPath, $fileName);
         if (!empty($oldImage) && file_exists($oldImage)) {
@@ -94,5 +94,20 @@ class UserRepository extends BaseRepository implements UserInterface
     public function getProfile($id)
     {
         return $this->find($id);
+    }
+
+    public function deletes ($id, $reviewRepository)
+    {
+        $user = $this->model->find($id);
+        if ($user) {
+            foreach ($user->reviews as $review) {
+                $reviewRepository->delete($review->id);
+            }
+            $user->delete();
+
+            return true;
+        }
+
+        return false;
     }
 }

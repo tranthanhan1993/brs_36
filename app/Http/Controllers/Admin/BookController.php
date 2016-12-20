@@ -9,21 +9,26 @@ use App\Repositories\Author\AuthorRepository;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Book\BookRepository;
 use App\Http\Controllers\BaseController;
+use App\Repositories\Review\ReviewRepository;
+
 
 class BookController extends BaseController
 {
     protected $bookRepository;
     protected $authorRepository;
     protected $categoryRepository;
+    protected $reviewRepository;
 
     public function __construct(
         BookRepository $bookRepository, 
         CategoryRepository $categoryRepository, 
-        AuthorRepository $authorRepository
+        AuthorRepository $authorRepository,
+        ReviewRepository $reviewRepository
     ) {
         $this->bookRepository = $bookRepository;
         $this->authorRepository = $authorRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->reviewRepository = $reviewRepository;
     }
 
     public function index()
@@ -132,7 +137,7 @@ class BookController extends BaseController
                 ->with('fails', trans('book.book_not_found'));
         }
 
-        if ($this->bookRepository->delete($id)) {
+        if ($this->bookRepository->deletes($id, $this->reviewRepository)) {
             return redirect()->action('Admin\BookController@index')
                 ->with('success', trans('book.delete_book_successfully'));
         }

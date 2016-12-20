@@ -25,4 +25,22 @@ class CategoryRepository extends BaseRepository
 
         return $categories;
     }
+
+    public function deletes($id, $bookRepository, $reviewRepository)
+    {
+        $category = $this->model->find($id);
+        if ($category) {
+            foreach ($category->books as $book) {
+                foreach ($book->reviews as $review) {
+                    $reviewRepository->delete($review->id);
+                }
+                $bookRepository->delete($book->id);
+            }
+            $category->delete();
+
+            return true;
+        }
+
+        return false;
+    }
 }
