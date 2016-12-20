@@ -28,7 +28,7 @@ class MarkController extends Controller
             if (!$mark) {
                 $marks = [
                     'status' => $value,
-                    'bookId' => $bookId,
+                    'book_id' => $bookId,
                     'user_id' => Auth::user()->id,
                 ];
 

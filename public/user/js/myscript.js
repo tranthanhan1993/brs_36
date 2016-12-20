@@ -35,9 +35,9 @@ $(document).ready(function() {
         $.ajax({
             url: url,
             type: "POST",
-            data: {"type":'marks',"idbook":idbook,"_token":_token,"value" : value},
+            data: {"type": 'marks', "idbook": idbook,"_token": _token, "value" : value},
             success: function(kq) {
-                alert(kq);
+               
             }
         });
     });
@@ -61,7 +61,6 @@ $(document).ready(function() {
                         if (response.success) {
                             $("#reviewhere").before(response.data);
                             $('input:text[name=txtreview]').val("");
-                            
                         } else {
                             alert("error");
                         }    
