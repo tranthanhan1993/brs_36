@@ -23,7 +23,7 @@ return [
     'last' => 'Last',
     'unlike' => 'Unlike',
     'book_category' => 'Category',
-    'title' => 'Title',
+    'tittle' => 'Tittle',
     'num_pages' => 'Num Pages',
     'image' => 'Image',
     'create_book_successfully' => 'Create Book Success!!',

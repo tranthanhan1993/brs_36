@@ -37,7 +37,7 @@ class BookController extends BaseController
         $data = [
             'book' => $book,
             'haveLike' => $this->likeInterface->check(Auth::user()->id, $bookId),
-            'markbook' => $this->markInterface->check($bookId ,Auth::user()->id),
+            'markbook' => $this->markInterface->check($bookId, Auth::user()->id),
         ];
 
         if (!$book) {

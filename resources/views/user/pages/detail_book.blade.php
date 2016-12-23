@@ -67,7 +67,7 @@
                 <div>
                     {{ Html::image('user/img/$review->user->image', 'a picture', ['class' => 'imgreview']) }}
                     <div>
-                        <a class="ava_cmt">{{ $review->user->name }}</a> {{ $review->content }}
+                        <a href="{{ action('User\TimelineController@getTimelineUser', $review->user->id) }}" class="ava_cmt">{{ $review->user->name }}</a> {{ $review->content }}
                     </div>
                     <div >
                         <a class="a like_a_cm">{{ trans('book.like') }}</a>
@@ -79,7 +79,7 @@
                         @foreach ($review->comments as $comment)
                             {{ Html::image('user/img/page3_pic4.jpg', 'a picture', ['class' => 'img_cmt']) }}
                             <div>
-                                <a href="" class="show_name">{{ $comment->user->name }} </a> {{ $comment->content }}
+                                <a href="{{ action('User\TimelineController@getTimelineUser', $comment->user->id) }}" class="show_name">{{ $comment->user->name }} </a> {{ $comment->content }}
                             </div>
                             <div class="ava_cmt1">
                                 <a class="like_cmt">{{ trans('book.like') }}</a>
