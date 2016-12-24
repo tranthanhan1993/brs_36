@@ -36,8 +36,8 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
     Route::resource('request', 'User\RequestController', [
         'only' => ['index', 'store', 'destroy']
     ]);
-    Route::post('maskLike', ['as' => 'maskLike', 'uses'=> 'User\LikeController@maskLike']);
-    Route::post('maskbook', ['as' => 'maskBook', 'uses'=> 'User\MarkController@markBook']);
+    Route::post('markLike', ['as' => 'markLike', 'uses'=> 'User\LikeController@markLike']);
+    Route::post('markbook', ['as' => 'markBook', 'uses'=> 'User\MarkController@markBook']);
     Route::resource('review', 'User\ReviewController', [
         'only' => ['store']
     ]);
