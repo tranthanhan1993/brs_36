@@ -150,6 +150,6 @@
 @endsection
 @section('content1')
 <div class="timeacti">
-    @include('user.blocks.time_follow')
+    @include('user.blocks.time_follow', ['activities' => $followActivities])
 </div>
 @endsection

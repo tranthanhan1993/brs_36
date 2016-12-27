@@ -8,9 +8,9 @@
                 <h2>{{ $data['book']->tittle }}</h2>
                 <input type="hidden" idtoken="{{ csrf_token() }}" class="gettoken" />
                 <div class="hide" data-route="{!! url('/home') !!}"></div>
-                @if ($data['haveLike']== false)
+                @if (!$data['haveLike'])
                     <input type="button" id ="bt" idbv="{{ $data['book']->id }}" value="Mark favorite"  >
-                @else 
+                @else
                     <input type="button" id ="bt" idbv="{{ $data['book']->id }}" value="Remove favorite mark"  >
                 @endif
                 <table>
@@ -48,7 +48,7 @@
                             @if ($data['markbook'] == 1)
                                 <td><input type="radio" name="mask" checked="checked" value="1" idbv="{{ $data['book']->id }}" >{{ trans('book.mark_book_as_reading') }} </td>
                                 <td><input type="radio" name="mask" value="2" idbv="{{ $data['book']->id }}" >{{ trans('book.mark_book_as_readed') }}</td>
-                            @else 
+                            @else
                                 <td><input type="radio" name="mask"  value="1" idbv="{{ $data['book']->id }}" >{{ trans('book.mark_book_as_reading') }} </td>
                                 <td><input type="radio" checked="checked" name="mask" value="2" idbv="{{ $data['book']->id }}" >{{ trans('book.mark_book_as_readed') }}</td>
                             @endif
@@ -105,6 +105,6 @@
 @endsection
 @section('content1')
 <div class="detail timeacti">
-    @include('user.blocks.time_follow')
+    @include('user.blocks.time_follow', ['activities' => $followActivities])
 </div>
 @endsection

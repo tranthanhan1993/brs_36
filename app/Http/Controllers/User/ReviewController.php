@@ -39,9 +39,9 @@ class ReviewController extends Controller
                 ];
 
                 if ($this->TimelineInterface->insertAction($timeline)) {
-                    return [ 
-                        'success' => true, 
-                        'data' => view('user.temps.temp_detail', compact('data', 'review'))->render(), 
+                    return [
+                        'success' => true,
+                        'data' => view('user.temps.temp_detail', compact('data', 'review'))->render(),
                     ];
                 }
 
