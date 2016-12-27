@@ -11,6 +11,13 @@
             <img src="{{ $user->getAvatarPath() }}" alt="User Avatar">
         </div>
         <h3 class="home_img_h3">{{ trans('master.profile') }}</h3>
+            @if (!$status)
+                {!! Form::open(['class' => 'form-horizontal', 'action' => ['User\TimelineController@postFollow', $user->id]]) !!}
+                    {!! Form::button(trans('master.follow'), ['class' => 'form-control', 'id' => $user->id]) !!}
+                {!! Form::close() !!}
+            @endif
+        <h3 class="home_img_h3">{{ Html::image('user/img/prof.png','a picture', array('class' => 'imgleft')) }}{{ trans('master.profile') }}</h3>
+        <div class="hide" data-route="{!! URL::action('User\TimelineController@getTimeline') !!}"></div>
         <div class="cclear"></div>
         <ul class="list2">
             <li><a >{{ trans('user.name') }}: {{ $user->name }}</a></li>
@@ -24,7 +31,7 @@
             <li><a >{{ trans('user.phone') }}: {{ $user->phone }}</a></li>
             <li><a >{{ trans('user.address') }}: {{ $user->address }}</a></li>
             @if ($user->id == Auth::user()->id)
-                <a href="{!! action('User\UsersController@edit', $user->id) !!}" 
+                <a href="{!! action('User\UsersController@edit', $user->id) !!}"
                     class="btn btn-default btn-xs">{{ trans('user.edit_profile') }}</a>
             @endif
         </ul>

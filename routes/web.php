@@ -25,6 +25,10 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
     'as' => 'user',
     'uses' => 'User\TimelineController@getTimelineUser',
     ]);
+    Route::post('/follow/{id}', [
+        'as' => 'follow',
+        'uses' => 'User\TimelineController@postFollow'
+    ]);
     Route::post('/unfollow/{id}', [
         'as' => 'unFollow',
         'uses' => 'User\TimelineController@postUnFollow',
