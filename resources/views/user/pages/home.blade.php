@@ -2,13 +2,15 @@
 @section('content')
 <div class="freework">
     <article class="col-lg-3 col-md-3 col-sm-3 sm3">
-        {{ Html::image('user/img/'.$user->image, 'a picture', ['class' => 'home_img', 'id' => 'avatar']) }}
-            @if ($user->id == Auth::user()->id)
-                {!! Form::open(['class' => 'form-horizontal']) !!}
-                {!! Form::file('imageFile', ['class' => 'inputImg', 'id' => 'imageFile'] ) !!}
-                {!! Form::close() !!}
-            @endif
-        <h3 class="home_img_h3">{{ Html::image('user/img/prof.png','a picture', array('class' => 'imgleft')) }}{{ trans('master.profile') }}</h3>
+        <div class="col-lg-12" id="alert">
+            @include('admin.block.fails')
+            @include('admin.block.success')
+        </div>
+        <div class="home_img" id="avatar">
+            <img src="{{ $user->getAvatarPath() }}" width="100%" height="100%" alt="User Avatar">
+        </div>
+        <!-- <img src="{{ $user->getAvatarPath() }}"  alt="User Avatar" width="80px" height="50px">, ['class' => 'home_img', 'id' => 'avatar']) }} -->
+        <h3 class="home_img_h3">{{ trans('master.profile') }}</h3>
         <div class="cclear"></div>
         <ul class="list2">
             <li><a >{{ trans('user.name') }}: {{ $user->name }}</a></li>
@@ -22,10 +24,7 @@
             <li><a >{{ trans('user.phone') }}: {{ $user->phone }}</a></li>
             <li><a >{{ trans('user.address') }}: {{ $user->address }}</a></li>
             @if ($user->id == Auth::user()->id)
-                {!! Form::open(['class' => 'form-horizontal']) !!}
-                    <a href="#" class="edit_follow">{{ trans('master.edit') }}</a>
-                    <li>{!! Form::submit(trans('master.update'), ['class' => 'edit_follow']) !!}</li>
-                {!! Form::close() !!}
+                    <a href="{!! action('User\UsersController@edit', $user->id) !!}" class="btn btn-default btn-xs">{{ trans('user.edit_profile') }}</a>
             @endif
         </ul>
                 <!-- FAVORITE BOOKS -->
@@ -150,6 +149,6 @@
 @endsection
 @section('content1')
 <div class="timeacti">
-    @include('user.blocks.time_follow')
+    @include('user.blocks.time_follow', ['activities' => $followActivities])
 </div>
 @endsection

@@ -43,5 +43,7 @@ return [
     'edit_user' => 'Edit User',
     'update_user_successfully' => 'Update User Success!!',
     'update_user_fail' => 'Update User Fail!!',
+    'edit_profile' => 'Edit Profile',
+    'curent_avatar' => 'Curent Avatar',
 ];
 

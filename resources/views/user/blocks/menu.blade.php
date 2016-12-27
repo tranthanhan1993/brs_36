@@ -21,7 +21,7 @@
                 </nav>
             </div>
             <ul class="head_list">
-                <li><a href="#">{{ trans('master.logout') }} </a></li>
+                <li><a href="{{ url('/logout') }}">{{ trans('master.logout') }} </a></li>
             </ul>
         </header>
     </article>
