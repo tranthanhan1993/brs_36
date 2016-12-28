@@ -38,12 +38,14 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
     ]);
     Route::post('markLike', ['as' => 'markLike', 'uses'=> 'User\LikeController@markLike']);
     Route::post('markbook', ['as' => 'markBook', 'uses'=> 'User\MarkController@markBook']);
+    Route::post('rateBook', ['as' => 'rateBook', 'uses'=> 'User\RateController@rateBook']);
     Route::resource('review', 'User\ReviewController', [
         'only' => ['store']
     ]);
     Route::resource('comment', 'User\CommentController', [
         'only' => ['store']
     ]);
+    Route::resource('user', 'User\UsersController', ['only' => ['edit', 'update']]);
 });
 
 Route::get('/custom-register',[

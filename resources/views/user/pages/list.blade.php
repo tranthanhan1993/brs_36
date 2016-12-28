@@ -4,8 +4,10 @@
     <h3 class="h3_list">{{ trans('book.category') }}: {{ $categoryMaster[$categoryId]->name }} </h3>
     @forelse ($books as $book)
         <div class="khung">
-            <a href="{!! URL::action('User\BookController@getDetail', $book->id) !!}">{{ Html::image('user/img/book->image') }}</a>
-            <div><a href="{!! URL::action('User\BookController@getDetail', $book->id) !!}">{{ $book->tittle }}</a></div>
+            <a href="{!! action('User\BookController@getDetail', $book->id) !!}">
+                {{ Html::image(book->getImagePath()) }}
+            </a>
+            <div><a href="{!! action('User\BookController@getDetail', $book->id) !!}">{{ $book->tittle }}</a></div>
             <p class="p_khung">{{ trans('book.author') }}: {{ $book->author->name }}</p>
             <p>{{ trans('book.number_of_likes') }}: {{ $book->num_pages }}</p>
             <p>{{ trans('book.rate') }}: {{ $book->rate_avg }} {{ Html::image('user/img/star.png') }}</p>
