@@ -1,6 +1,7 @@
 @extends('user.master')
 @section('content')
 <div class="freework">
+    <div class="hide" data-route="{!! url('/home') !!}"></div>
     <article class="col-lg-3 col-md-3 col-sm-3 sm3">
         <img src="{{ $user->getAvatarPath() }}">
         <h3 class="home_img_h3">{{ trans('master.profile') }}</h3>
@@ -29,7 +30,7 @@
             @foreach ($data['favorites'] as $favorite)
             <a href="#">
                 <div class="bfollow">
-                    {{ Html::image('user/img/'.$favorite['image']) }}
+                    {{ Html::image('user/img/' . $favorite['image']) }}
                     <p> {{ $favorite['tittle'] }} </p>
                 </div>
             </a>
@@ -37,7 +38,7 @@
         </div>
                 <!-- END FAVORITE BOOKS -->
                 <!-- LIST FOLLOW -->
-        <h3 class="fo_h3">{{ Html::image('user/img/fl.png','a picture', ['class' => 'imgleft']) }}{{ trans('master.list_follow') }}</h3>
+        <h3 class="fo_h3">{{ Html::image('user/img/fl.png', 'a picture', ['class' => 'imgleft']) }}{{ trans('master.list_follow') }}</h3>
         <div class="list_follow" id="follow" >
             <div class="tbfollow" >
                 {!! Form::open(['class' => 'form-horizontal']) !!}
@@ -49,9 +50,9 @@
                     </tr>
                     @foreach ($data['followed'] as $follow)
                     <tr>
-                        <td>{{ Html::image('user/img/'.$follow['image'],'a picture', ['class' => 'imgfollow']) }}</td>
+                        <td>{{ Html::image('user/img/' . $follow['image'], 'a picture', ['class' => 'imgfollow']) }}</td>
                         <td>
-                            <a href="/home/user/{{ $follow['id'] }}">{{ $follow['name'] }}</a>
+                            <a href="{{ action('User\TimelineController@getTimelineUser', $follow['id']) }}">{{ $follow['name'] }}</a>
                             <p> {{ $follow['countFollowed']}}
                                 {{ trans('master.follower') }}
                             </p>
@@ -103,29 +104,29 @@
                                         <td colspan="2"><h2><a href ="#">{{ $action['content']->tittle }}</a></h2></td>
                                     </tr>
                                     <tr>
-                                        <td>{{ Html::image('user/img/author.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.author') }}:</td>
+                                        <td>{{ Html::image('user/img/author.png', 'a picture', array('class' => 'iconinfo')) }}{{ trans('book.author') }}:</td>
                                         <td>{{ $action['content']->author->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td>{{ Html::image('user/img/cate.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.category') }}:</td>
+                                        <td>{{ Html::image('user/img/cate.png', 'a picture', array('class' => 'iconinfo')) }}{{ trans('book.category') }}:</td>
                                         <td>{{ $action['content']->category->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td>{{ Html::image('user/img/clock.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.public_day') }}:</td>
+                                        <td>{{ Html::image('user/img/clock.png', 'a picture', array('class' => 'iconinfo')) }}{{ trans('book.public_day') }}:</td>
                                         <td>{{ $action['content']->public_date }}</td>
                                     </tr>
                                     <tr>
-                                        <td>{{ Html::image('user/img/number.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.number_of_likes') }}: </td>
+                                        <td>{{ Html::image('user/img/number.png', 'a picture', array('class' => 'iconinfo')) }}{{ trans('book.number_of_likes') }}: </td>
                                         <td>{{ $action['content']->num_pages }}</td>
                                     </tr>
                                     <tr>
-                                        <td>{{ Html::image('user/img/rate1.png','a picture', array('class' => 'iconinfo')) }}{{ trans('book.rate') }}: </td>
+                                        <td>{{ Html::image('user/img/rate1.png', 'a picture', array('class' => 'iconinfo')) }}{{ trans('book.rate') }}: </td>
                                         <td>
-                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
-                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
-                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
-                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
-                                            {{ Html::image('user/img/star.png','a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png', 'a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png', 'a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png', 'a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png', 'a picture', array('class' => 'starrate')) }}
+                                            {{ Html::image('user/img/star.png', 'a picture', array('class' => 'starrate')) }}
                                         </td>
                                     </tr>
                                     <tr>
