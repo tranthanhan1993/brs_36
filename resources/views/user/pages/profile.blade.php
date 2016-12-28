@@ -17,8 +17,10 @@
                     ) !!}
 
                         <div class="form-group">
-                            {!! Form::label('image', trans('user.curent_avatar'), ['class' => 'col-md-6 control-label']) !!}
-                            <img src="{{ $user->getAvatarPath() }}"  alt="User Avatar">
+                            {!! Form::label('image', trans('user.curent_avatar'), ['class' => 'col-md-4 control-label']) !!}
+                            <div class="profile_img" id="avatar">
+                                <img src="{{ $user->getAvatarPath() }}" alt="User Avatar">
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -144,8 +146,4 @@
     </div>
 </div>
 @endsection
-@section('content1')
-    <div class="timeacti">
-        @include('user.blocks.time_follow')
-    </div>
-@endsection
+
