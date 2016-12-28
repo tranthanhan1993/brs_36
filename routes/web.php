@@ -22,10 +22,6 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
         'as' => 'user',
         'uses' => 'User\TimelineController@getTimelineUser',
     ]);
-    Route::post('/follow/{id}', [
-        'as' => 'follow',
-        'uses' => 'User\TimelineController@postFollow'
-    ]);
     Route::post('/unfollow/{id}', [
         'as' => 'unFollow',
         'uses' => 'User\TimelineController@postUnFollow',
@@ -40,6 +36,10 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
     Route::post('markLike', ['as' => 'markLike', 'uses'=> 'User\LikeController@markLike']);
     Route::post('markbook', ['as' => 'markBook', 'uses'=> 'User\MarkController@markBook']);
     Route::post('rateBook', ['as' => 'rateBook', 'uses'=> 'User\RateController@rateBook']);
+    Route::post('delComment/{id}', ['as' => 'delComment', 'uses'=> 'User\CommentController@delete']);
+    Route::post('editComment/{id}', ['as' => 'editComment', 'uses'=> 'User\CommentController@update']);
+    Route::post('delReview/{id}', ['as' => 'delReview', 'uses'=> 'User\ReviewController@delete']);
+    Route::post('editReview/{id}', ['as' => 'editReview', 'uses'=> 'User\ReviewController@update']);
     Route::resource('review', 'User\ReviewController', [
         'only' => ['store']
     ]);
