@@ -7,11 +7,11 @@
                 <div class="panel-heading">{{ trans('user.profile') }}</div>
                 <div class="panel-body">
                     {!! Form::model(
-                        $user, 
+                        $user,
                         [
-                            'action' => ['User\UsersController@update', $user->id], 
-                            'class' => 'form-horizontal', 
-                            'method' => 'PUT', 
+                            'action' => ['User\UsersController@update', $user->id],
+                            'class' => 'form-horizontal',
+                            'method' => 'PUT',
                             'enctype' => 'multipart/form-data',
                         ]
                     ) !!}
@@ -121,7 +121,7 @@
                         <div class="form-group">
                             {!! Form::label('address', trans('user.address'), ['class' => 'col-md-4 control-label']) !!}
                             <div class="col-md-6">
-                                {!! Form::text('address', null, 
+                                {!! Form::text('address', null,
                                     ['class' => 'form-control', 'placeholder' => trans('user.address') ,'rows' => 3]
                                 ) !!}
 
