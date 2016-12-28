@@ -3,7 +3,13 @@
 <div class="freework">
     <div class="hide" data-route="{!! url('/home') !!}"></div>
     <article class="col-lg-3 col-md-3 col-sm-3 sm3">
-        <img src="{{ $user->getAvatarPath() }}">
+        <div class="col-lg-12" id="alert">
+            @include('admin.block.fails')
+            @include('admin.block.success')
+        </div>
+        <div class="home_img" id="avatar">
+            <img src="{{ $user->getAvatarPath() }}" alt="User Avatar">
+        </div>
         <h3 class="home_img_h3">{{ trans('master.profile') }}</h3>
         <div class="cclear"></div>
         <ul class="list2">

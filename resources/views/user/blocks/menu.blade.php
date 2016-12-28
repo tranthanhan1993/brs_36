@@ -15,7 +15,6 @@
                                 @endforelse
                             </ul>
                         </li>
-                        <li><a href="#">{{ trans('master.history') }}</a></li>
                         <li><a href="{!! URL::action('User\RequestController@index') !!}">{{ trans('master.request') }}</a></li>
                     </ul>
                 </nav>
