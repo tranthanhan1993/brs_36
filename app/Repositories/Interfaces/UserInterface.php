@@ -10,4 +10,5 @@ interface UserInterface
     public function update($inputs, $id);
     public function uploadAvatar($oldImage);
     public function getProfile($id);
+    public function searchUser($value, $currentUser);
 }

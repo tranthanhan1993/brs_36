@@ -95,4 +95,36 @@ class UserRepository extends BaseRepository implements UserInterface
     {
         return $this->find($id);
     }
+
+    public function delete ($id)
+    {
+        $user = $this->model->find($id);
+        if ($user) {
+            foreach ($user->reviews as $review) {
+                $this->reviewRepository->delete($review->id);
+            }
+
+            foreach ($user->requests as $request) {
+                $this->requestRepository->delete($request->id);
+            }
+
+            $user->delete();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function searchUser($value, $currentUser)
+    {
+        return $this->model
+            ->orWhere(function($query) use ($value, $currentUser) {
+                $query->where('email', 'LIKE', "%$value%")->where('id', '<>', $currentUser);
+            })
+            ->orWhere(function($query) use ($value, $currentUser) {
+                $query->where('name', 'LIKE', "%$value%")->where('id', '<>', $currentUser);
+            })
+            ->get();
+    }
 }

@@ -122,4 +122,9 @@ class TimelineRepository extends  BaseRepository implements TimelineInterface
 
         return $activities;
     }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
 }

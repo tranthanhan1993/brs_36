@@ -18,7 +18,7 @@ class BookRepository extends BaseRepository implements BookInterface
 
     public function getAllOfBook($categoryId)
     {
-        return $this->model->where('category_id', $categoryId)->paginate(9);
+        return $this->model->where('category_id', $categoryId)->paginate(config('setting.paginate'));
     }
 
     public function getDetailBook($bookId)
@@ -27,7 +27,7 @@ class BookRepository extends BaseRepository implements BookInterface
 
         return $book;
     }
-    
+
     public function check($userId, $bookId, $table)
     {
         if ($this->$table->check($userId, $bookId)) {
@@ -37,4 +37,12 @@ class BookRepository extends BaseRepository implements BookInterface
         return false;
     }
 
+    public function searchBook($value, $colum, $options)
+    {
+        return $this->model
+            ->orWhere('tittle', 'LIKE' , "%$value%")
+            ->orWhere('rate_avg', $value)
+            ->orWhereIn($colum, $options)
+            ->paginate(config('setting.paginate'));
+    }
 }

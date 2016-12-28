@@ -5,12 +5,39 @@ namespace App\Repositories\Book;
 use App\Models\Book;
 use App\Repositories\BaseRepository;
 use Input;
+use App\Repositories\Eloquents\ReviewRepository;
+use DB;
+use App\Repositories\Eloquents\FavoriteRepository;
+use App\Repositories\Eloquent\MarkRepository;
+use App\Repositories\Eloquents\RateRepository;
+use App\Repositories\Eloquent\LikeRepository;
+use App\Repositories\Eloquents\TimelineRepository;
 
 class BookRepository extends BaseRepository
 {
-    public function __construct(Book $book)
-    {
+    protected $reviewRepository;
+    protected $favoriteRepository;
+    protected $markRepository;
+    protected $rateRepository;
+    protected $timelineRepository;
+    protected $likeRepository;
+
+    public function __construct(
+        Book $book,
+        ReviewRepository $reviewRepository,
+        FavoriteRepository $favoriteRepository,
+        MarkRepository $markRepository,
+        RateRepository $rateRepository,
+        LikeRepository $likeRepository,
+        TimelineRepository $timelineRepository
+    ) {
         $this->model = $book;
+        $this->reviewRepository = $reviewRepository;
+        $this->favoriteRepository = $favoriteRepository;
+        $this->markRepository = $markRepository;
+        $this->rateRepository = $rateRepository;
+        $this->timelineRepository = $timelineRepository;
+        $this->likeRepository = $likeRepository;
     }
 
     public function create($request)
@@ -67,5 +94,46 @@ class BookRepository extends BaseRepository
         }
 
         return $fileName;
+    }
+
+    public function deleteBook($id)
+    {
+        $book = $this->model->find($id);
+        DB::beginTransaction();
+
+        if ($book) {
+            try {
+                $this->timelineRepository->getModel()
+                    ->orWhere(function ($query) use ($book) {
+                        $query->where('target_type', config('settings.reviews'))
+                            ->whereIn('target_id', $book->reviews()->get(['id'])->pluck('id'));
+                    })
+                    ->orWhere(function ($query) use ($book) {
+                        $query->where('target_type', config('settings.favorites'))
+                            ->whereIn('target_id', $book->favorites()->get(['id'])->pluck('id'));
+                    })
+                    ->orWhere(function ($query) use ($book) {
+                        $query->where('target_type', config('settings.rates'))
+                            ->whereIn('target_id', $book->rates()->get(['id'])->pluck('id'));
+                    })
+                    ->orWhere(function ($query) use ($book) {
+                        $query->where('target_type', config('settings.marks'))
+                            ->whereIn('target_id', $book->marks()->get(['id'])->pluck('id'));
+                    })
+                    ->delete();
+                $book->reviews()->delete();
+                $book->favorites()->delete();
+                $book->rates()->delete();
+                $book->marks()->delete();
+                $this->delete($id);
+                DB::commit();
+
+                return true;
+            } catch (Exception $e) {
+                DB::rollback();
+
+                return false;
+            }
+        }
     }
 }
