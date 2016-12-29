@@ -7,12 +7,34 @@ use Input;
 use Hash;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\UserInterface;
+use App\Repositories\Review\ReviewRepository;
+use App\Repositories\Eloquents\CommentRepository;
+use App\Repositories\Eloquents\FavoriteRepository;
+use App\Repositories\Eloquents\FollowRepository;
+use App\Repositories\Eloquents\RateRepository;
+use App\Repositories\Eloquent\MarkRepository;
+use App\Repositories\Eloquent\RequestRepository;
 
 class UserRepository extends BaseRepository implements UserInterface
 {
-    public function __construct(User $user)
-    {
+    public function __construct(
+        User $user,
+        ReviewRepository $reviewRepository,
+        CommentRepository $commentRepository,
+        FavoriteRepository $favoriteRepository,
+        FollowRepository $followRepository,
+        RateRepository $rateRepository,
+        MarkRepository $markRepository,
+        RequestRepository $requestRepository
+    ) {
         $this->model = $user;
+        $this->reviewRepository = $reviewRepository;
+        $this->commentRepository = $commentRepository;
+        $this->favoriteRepository = $favoriteRepository;
+        $this->followRepository = $followRepository;
+        $this->rateRepository = $rateRepository;
+        $this->markRepository = $markRepository;
+        $this->requestRepository = $requestRepository;
     }
 
     public function createUser($datas)
@@ -96,11 +118,14 @@ class UserRepository extends BaseRepository implements UserInterface
         return $this->find($id);
     }
 
-    public function delete ($id)
+    public function delete($id)
     {
         $user = $this->model->find($id);
         if ($user) {
             foreach ($user->reviews as $review) {
+                foreach ($review->comments as $comment) {
+                    $this->commentRepository->delete($comment->id);
+                }
                 $this->reviewRepository->delete($review->id);
             }
 
@@ -108,6 +133,21 @@ class UserRepository extends BaseRepository implements UserInterface
                 $this->requestRepository->delete($request->id);
             }
 
+            foreach ($user->comments as $comment) {
+                $this->commentRepository->delete($comment->id);
+            }
+
+            foreach ($user->favorites as $favorite) {
+                $this->favoriteRepository->delete($favorite->id);
+            }
+
+            foreach ($user->marks as $mark) {
+                $this->markRepository->delete($mark->id);
+            }
+
+            foreach ($user->rates as $rate) {
+                $this->rateRepository->delete($rate->id);
+            }
             $user->delete();
 
             return true;

@@ -43,7 +43,7 @@ class RequestController extends BaseController
     {
         $inputs = [
             'content' => $request->content,
-            'status' => 1,
+            'status' => 0,
             'user_id' => Auth::user()->id,
         ];
 

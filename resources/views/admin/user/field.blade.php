@@ -37,8 +37,8 @@
 </div>
 
 <div class="form-group">
-    {{ Form::label('password-confirm', trans('auth.confirm_password'), ['class' => 'col-md-4 control-label']) }}
-    <div class="col-md-6">
+    {{ Form::label('password-confirm', trans('auth.confirm_password'), ['class' => 'col-lg-3 control-label']) }}
+    <div class="col-lg-7">
         {{ Form::password('password', ['class' => 'form-control', 'name' => 'password_confirmation']) }}
     </div>
 </div>

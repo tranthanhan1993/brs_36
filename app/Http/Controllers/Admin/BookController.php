@@ -132,7 +132,7 @@ class BookController extends BaseController
                 ->with('fails', trans('book.book_not_found'));
         }
 
-        if ($this->bookRepository->delete($id)) {
+        if ($this->bookRepository->deleteBook($id)) {
             return redirect()->action('Admin\BookController@index')
                 ->with('success', trans('book.delete_book_successfully'));
         }

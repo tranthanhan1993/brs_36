@@ -19,7 +19,7 @@
 
         <div class="form-group">
             {!! Form::label('Image', trans('book.image')) !!}
-            <img src="{{ $book->image }}" class="img-responsive" alt="Book Image">
+                <img src="{{ $book->getImagePath () }}" class="img-rounded" alt="Book Image" width="100px" height="100px">
         </div>
 
         <div class="form-group">

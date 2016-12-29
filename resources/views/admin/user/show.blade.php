@@ -32,9 +32,9 @@
                 <p>{!! $user['address'] !!}</p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group profile_img">
                 {!! Form::label('image', trans('user.avatar')) !!}
-                <img src="{{ $user->image }}" class="img-responsive" alt="User Avatar">
+                <img src="{{ $user->getAvatarPath() }}" class="img-rounded" alt="User Avatar" width="100px" height="100px">
             </div>
 
             <div class="form-group">

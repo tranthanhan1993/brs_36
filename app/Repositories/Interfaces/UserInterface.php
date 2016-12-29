@@ -11,4 +11,5 @@ interface UserInterface
     public function uploadAvatar($oldImage);
     public function getProfile($id);
     public function searchUser($value, $currentUser);
+    public function delete($id);
 }
