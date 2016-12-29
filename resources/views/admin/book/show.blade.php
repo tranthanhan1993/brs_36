@@ -17,9 +17,9 @@
             <p>{!! $book->tittle !!}</p>
         </div>
 
-        <div class="form-group">
+        <div class="form-group set_img">
             {!! Form::label('Image', trans('book.image')) !!}
-            <img src="{{ $book->image }}" class="img-responsive" alt="Book Image">
+            <img src="{{ $book->getImagePath() }}" alt="Book Image">
         </div>
 
         <div class="form-group">

@@ -64,4 +64,9 @@ class ReviewRepository extends BaseRepository implements ReviewInterface
     {
         return $this->find($id)->book;
     }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
 }

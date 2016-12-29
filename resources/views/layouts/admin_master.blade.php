@@ -11,6 +11,7 @@
     {!! Html::style('bower/bootstrap/dist/css/bootstrap.min.css') !!}
     {!! Html::style('bower/metisMenu/dist/metisMenu.min.css') !!}
     {!! Html::style('bower/dist/css/sb-admin-2.css') !!}
+    {!! Html::style('css/admin.css') !!}
     {!! Html::style('bower/font-awesome/css/font-awesome.min.css') !!}
     {!! Html::style('bower/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') !!}
     {!! Html::style('bower/datatables-responsive/css/dataTables.responsive.css') !!}

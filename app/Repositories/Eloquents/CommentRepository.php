@@ -75,4 +75,9 @@ class CommentRepository extends BaseRepository implements CommentInterface
 
         return false;
     }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
 }

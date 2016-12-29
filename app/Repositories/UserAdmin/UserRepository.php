@@ -7,12 +7,23 @@ use Input;
 use Hash;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\UserInterface;
+use App\Models\Activity;
+use DB;
+use App\Repositories\Eloquents\CommentRepository;
 
 class UserRepository extends BaseRepository implements UserInterface
 {
-    public function __construct(User $user)
-    {
+    protected $timeline;
+    protected $comments;
+
+    public function __construct(
+        User $user,
+        CommentRepository $comments,
+        Activity $timeline
+    ) {
         $this->model = $user;
+        $this->timeline = $timeline;
+        $this->comments = $comments;
     }
 
     public function createUser($datas)
@@ -39,7 +50,7 @@ class UserRepository extends BaseRepository implements UserInterface
             'name' => $request['name'],
             'email' => $request['email'],
             'image' => $fileName,
-            'password' => bcrypt($request['password']),
+            'password' => $request['password'],
             'gender' => $request['gender'],
             'phone' => $request['phone'],
             'address' => $request['address'],
@@ -96,24 +107,69 @@ class UserRepository extends BaseRepository implements UserInterface
         return $this->find($id);
     }
 
-    public function delete ($id)
+    public function delete($id)
     {
         $user = $this->model->find($id);
-        if ($user) {
-            foreach ($user->reviews as $review) {
-                $this->reviewRepository->delete($review->id);
+        DB::beginTransaction();
+        try{
+            if ($user) {
+                $commentsUser = $this->comments->getModel()
+                    ->whereIn('review_id', $user->reviews()->get(['id'])->pluck(['id']))
+                    ->get(['id'])->pluck(['id']);
+                $this->timeline
+                    ->orWhere(function ($query) use ($user) {
+                        $query->where('target_type', config('settings.relationships'))
+                            ->orWhereIn('target_id', $user->followers()->get(['id'])->pluck('id'))
+                            ->orWhereIn('target_id', $user->followeds()->get(['id'])->pluck('id'));
+                    })
+                    ->orWhere(function ($query) use ($user) {
+                        $query->where('target_type', config('settings.favorites'))
+                            ->whereIn('target_id', $user->favorites()->get(['id'])->pluck(['id']));
+                    })
+                    ->orWhere(function ($query) use ($commentsUser) {
+                        $query->where('target_type', config('settings.comments'))
+                            ->whereIn('target_id', $commentsUser);
+                    })
+                    ->orWhere(function ($query) use ($user) {
+                        $query->where('target_type', config('settings.comments'))
+                            ->whereIn('target_id', $user->comments()->get(['id'])->pluck(['id']));
+                    })
+                    ->orWhere(function ($query) use ($user) {
+                        $query->where('target_type', config('settings.rates'))
+                            ->whereIn('target_id', $user->rates()->get(['id'])->pluck(['id']));
+                    })
+                    ->orWhere(function ($query) use ($user) {
+                        $query->where('target_type', config('settings.reviews'))
+                            ->whereIn('target_id', $user->reviews()->get(['id'])->pluck(['id']));
+                    })
+                    ->orWhere(function ($query) use ($user) {
+                        $query->where('target_type', config('settings.marks'))
+                            ->whereIn('target_id', $user->marks()->get(['id'])->pluck(['id']));
+                    })
+                    ->delete();
+                $user->comments()->delete();
+                foreach ($user->reviews as $review) {
+                    $review->comments()->delete();
+                }
+                $user->reviews()->delete();
+                $user->requests()->delete();
+                $user->marks()->delete();
+                $user->favorites()->delete();
+                $user->rates()->delete();
+                $user->followers()->delete();
+                $user->followeds()->delete();
+                $user->likes()->delete();
+                $user->delete();
+
+                DB::commit();
+
+                return true;
             }
-
-            foreach ($user->requests as $request) {
-                $this->requestRepository->delete($request->id);
-            }
-
-            $user->delete();
-
-            return true;
-        }
-
+        } catch(Exception $e) {
+        DB::rollback();
+        
         return false;
+        }
     }
 
     public function searchUser($value, $currentUser)

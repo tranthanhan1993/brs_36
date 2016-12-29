@@ -32,10 +32,10 @@
                 <p>{!! $user['address'] !!}</p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group set_img">
                 {!! Form::label('image', trans('user.avatar')) !!}
-                <img src="{{ $user->image }}" class="img-responsive" alt="User Avatar">
-            </div>
+                <img src="{{ $user->getAvatarPath() }}" alt="User Avatar"
+>            </div>
 
             <div class="form-group">
                 {!! Form::label('created_at', trans('user.user_create_at')) !!}

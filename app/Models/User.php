@@ -58,12 +58,12 @@ class User extends Authenticatable
 
     public function followers()
     {
-        return $this->hasMany(Relationship::class);
+        return $this->hasMany(Relationship::class, 'follower_id');
     }
 
     public function followeds()
     {
-        return $this->hasMany(Relationship::class);
+        return $this->hasMany(Relationship::class, 'followed_id');
     }
 
     public function rates()

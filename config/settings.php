@@ -16,4 +16,5 @@ return [
     'likes' => 'likes',
     'follow' => 'relationships',
     'rates' => 'rates',
+    'relationships' => 'relationships',
 ];

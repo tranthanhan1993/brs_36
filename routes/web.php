@@ -29,6 +29,10 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
         'as' => 'unFollow',
         'uses' => 'User\TimelineController@postUnFollow',
     ]);
+    Route::post('/follow/{id}', [
+        'as' => 'follow',
+        'uses' => 'User\TimelineController@postFollow',
+    ]);
     Route::resource('list', 'User\BookController', [
     'only' => ['show']
     ]);
