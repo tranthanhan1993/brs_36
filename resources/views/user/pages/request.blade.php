@@ -60,7 +60,9 @@
                                 </td>
                                 <td>
                                     {!! Form::open(['action' => ['User\RequestController@destroy', $request->id] ,'method' => 'delete']) !!}
-                                        {!! Form::submit('Submit', ['class' => 'but btn-default btn1',  'onclick' => 'return confirm("' . trans('category.category_comfirm_delete') . '")']) !!}
+                                        {!! Form::submit(trans('book_request.cancel'), 
+                                            ['class' => 'but btn-default btn1',  
+                                            'onclick' => 'return confirm("' . trans('category.category_comfirm_delete') . '")']) !!}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>

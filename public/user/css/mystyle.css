@@ -43,7 +43,7 @@
 .divsearch a{ position: absolute;margin:-26px 0px 0px 233px; }
 .timeline{
     width: 600px;
-    height: 1120px;
+    height: 1179px;
     border:1px solid white;
     float: left;
     overflow:auto;
@@ -105,7 +105,7 @@
 .timeacti{
     overflow:auto;
     width: 270px;border:1px solid white;
-    float: left;height: 1070px;
+    float: left;height: 1130px;
     margin-bottom: 10px;
 }
 
