@@ -44,6 +44,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception) && $exception->getStatusCode() == 404) {
+            return redirect()->action('User\TimelineController@getTimeline');
+        }
+            
         return parent::render($request, $exception);
     }
 

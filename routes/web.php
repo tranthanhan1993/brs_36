@@ -9,9 +9,12 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-Route::get('/', function () {
-    return view('user.pages.login');
+Route::group(['middleware' => 'login'], function () {
+    Route::get('/', function() {
+        return view('user.pages.login');
+    });
 });
+
 Auth::routes();
 Route::group(['prefix' => '/home', 'middleware:user'], function () {
     Route::get('/', [
@@ -19,7 +22,7 @@ Route::group(['prefix' => '/home', 'middleware:user'], function () {
         'uses' => 'User\TimelineController@getTimeline',
     ]);
     Route::get('/user/{id}', [
-        'as' => 'user',
+        'as' => 'user-follow',
         'uses' => 'User\TimelineController@getTimelineUser',
     ]);
     Route::post('/unfollow/{id}', [

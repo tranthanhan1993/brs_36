@@ -33,9 +33,20 @@
                     <td>
                         {!! Form::open(['action' => ['Admin\UserController@destroy', $user->id], 'method' => 'DELETE']) !!}
                         <div class="btn-group">
-                            <a href="{!! action('Admin\UserController@show', $user->id) !!}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>
-                            <a href="{!! action('Admin\UserController@edit', $user->id) !!}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
-                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => 'return confirm("' . trans('user.user_comfirm_delete') . '")']) !!}
+                            <a href="{!! action('Admin\UserController@show', $user->id) !!}" class="btn btn-default btn-xs">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </a>
+                            <a href="{!! action('Admin\UserController@edit', $user->id) !!}" class="btn btn-default btn-xs">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </a>
+                            @if (Auth::user()->id != $user->id)
+                                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', 
+                                    [   
+                                        'type' => 'submit', 
+                                        'class' => 'btn btn-danger btn-xs', 
+                                        'onclick' => 'return confirm("' . trans('user.user_comfirm_delete') . '")'
+                                    ]) !!}
+                            @endif
                         </div>
                         {!! Form::close() !!}
                     </td>

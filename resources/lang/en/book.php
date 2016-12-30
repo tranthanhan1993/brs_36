@@ -25,7 +25,7 @@ return [
     'unlike' => 'Unlike',
     'book_category' => 'Category',
     'title' => 'Title',
-    'num_pages' => 'Num Pages',
+    'num_pages' => 'Number of pages',
     'image' => 'Image',
     'create_book_successfully' => 'Create Book Success!!',
     'create_book_fail' => 'Create Book Fails!!',

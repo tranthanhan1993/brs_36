@@ -27,7 +27,7 @@
                         <td>{{ $data['book']->public_date }}</td>
                     </tr>
                     <tr>
-                        <td>{{ trans('book.number_of_likes') }}: </td>
+                        <td>{{ trans('book.num_pages') }}: </td>
                         <td>{{ $data['book']->num_pages }}</td>
                     </tr>
                     <tr>
